@@ -1,0 +1,25 @@
+{
+  "name": "online-book-adventures",
+  "private": true,
+  "workspaces": [
+    "frontend"
+  ],
+  "scripts": {
+    "bootstrap": "npm install --prefix frontend",
+    "restore": "dotnet restore backend/OnlineBookAdventures.slnx && npm run restore:frontend",
+    "restore:frontend": "npm install --prefix frontend",
+    "dev:backend": "dotnet run --project backend/src/OnlineBookAdventures.Api/OnlineBookAdventures.Api.csproj",
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:services": "docker compose up postgres redis rabbitmq minio",
+    "dev:stack": "docker compose up --build",
+    "build": "npm run build:backend && npm run build:frontend",
+    "build:backend": "dotnet build backend/OnlineBookAdventures.slnx",
+    "build:frontend": "npm --prefix frontend run build",
+    "test": "npm run test:backend && npm run test:frontend",
+    "test:backend": "dotnet test backend/OnlineBookAdventures.slnx",
+    "test:frontend": "npm --prefix frontend run test -- --runInBand",
+    "lint": "npm --prefix frontend run lint",
+    "type-check": "npm --prefix frontend run type-check",
+    "clean": "dotnet clean backend/OnlineBookAdventures.slnx"
+  }
+}
