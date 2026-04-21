@@ -62,7 +62,7 @@ jobs:
         run: dotnet build --no-restore --configuration Release
 
       - name: Add Markdown report logger
-        run: dotnet add tests/OnlineBookAdventures.Tests package LiquidTestReports.MarkdownLogger
+        run: dotnet add tests/OnlineBookAdventures.Tests package LiquidTestReports.Markdown --version 2.0.0-beta.2 
 
       - name: Run tests
         run: dotnet test --no-build --configuration Release --verbosity normal --logger "liquid.md;logFilename=test-results.md"
