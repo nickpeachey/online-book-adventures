@@ -61,8 +61,15 @@ jobs:
       - name: Build
         run: dotnet build --no-restore --configuration Release
 
+      - name: Add Markdown report logger
+        run: dotnet add tests/OnlineBookAdventures.Tests package LiquidTestReports.MarkdownLogger
+
       - name: Run tests
-        run: dotnet test --no-build --configuration Release --verbosity normal
+        run: dotnet test --no-build --configuration Release --verbosity normal --logger "liquid.md;logFilename=test-results.md"
         env:
           ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=cyoa_test;Username=cyoa;Password=cyoa_test_password"
           Redis__ConnectionString: "localhost:6379"
+
+      - name: Upload test results
+        if : always()
+        run: cat$(find . -name "test-results.md") >> $GITHUB_STEP_SUMMARY
