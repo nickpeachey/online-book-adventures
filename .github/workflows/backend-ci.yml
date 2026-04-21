@@ -71,5 +71,5 @@ jobs:
           Redis__ConnectionString: "localhost:6379"
 
       - name: Upload test results
-        if : always()
-        run: cat$(find . -name "test-results.md") >> $GITHUB_STEP_SUMMARY
+        if: always()
+        run: cat $(find . -name "test-results.md") >> $GITHUB_STEP_SUMMARY
